@@ -2,10 +2,10 @@ import httpx
 from fastapi import HTTPException, Response, WebSocket
 from fastapi.responses import JSONResponse
 
-from api_models.users import UserLoginResponse, UserLogoutResponse
+from shared_definitions.api_models.users import UserLoginResponse, UserLogoutResponse
 
-from api_models.error import ServiceError
-from api_models.users import GetSessionResponse
+from shared_definitions.api_models.error import ServiceError
+from shared_definitions.api_models.users import GetSessionResponse
 from .addresses import API_PORT, USERS_SERVICE_HOST, QUESTIONS_SERVICE_HOST, SESSIONS_SERVICE_HOST, MATCHING_SERVICE_HOST
 from .api_permissions import *
 import websockets
