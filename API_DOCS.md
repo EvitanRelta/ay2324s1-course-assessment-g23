@@ -1,5 +1,7 @@
 # Makeshift docs for all APIs
 
+<br>
+
 ## API format
 All the APIs have the form: `/api/[SERVICE_NAME]/[API_PATH]`
 
@@ -10,6 +12,8 @@ For example:
   - `/questions_all` is the API-endpoint in "questions" service
 - Which maps to `GET /questions_all` in questions-service
 
+
+<br>
 
 <br>
 
@@ -24,9 +28,13 @@ For example:
 - Must be same user or maintainer
   (for APIs with `user_id` like `"/users/{user_id}"`, `user_id` must belong to user)
 
+<br>
+
 ### Users service
 
 Prefix for API path: `/api/users`
+
+<br>
 
 #### `POST /users`
 Signup/Creates a new user.
@@ -49,6 +57,8 @@ Response payload:
 }
 ```
 
+<br>
+
 #### `GET /user_me`
 Get user details of the currently logged-in user.
 
@@ -64,6 +74,8 @@ Response payload:
 }
 ```
 
+<br>
+
 #### `GET /users/{user_id}`
 Get user details of a specific user by their user ID.
 
@@ -78,6 +90,8 @@ Response payload:
     "role": "normal or maintainer",
 }
 ```
+
+<br>
 
 #### `GET /users_all`
 Get list of all users' details.
@@ -96,6 +110,8 @@ Response payload:
 ]
 ```
 
+<br>
+
 #### `DELETE /users_all`
 Delete all users.
 
@@ -107,6 +123,8 @@ Response payload:
     "message": "Delete all users message",
 }
 ```
+
+<br>
 
 #### `DELETE /users/{user_id}`
 Delete specific user by their user ID.
@@ -120,6 +138,8 @@ Response payload:
 }
 ```
 
+
+<br>
 
 #### `PUT /users/{user_id}`
 Update a specific user's details.
@@ -142,6 +162,8 @@ Response payload:
 }
 ```
 
+<br>
+
 #### `PUT /users_role/{user_id}`
 Update a specific user's role.
 
@@ -161,6 +183,8 @@ Response payload:
 }
 ```
 
+
+<br>
 
 #### `POST /token`
 Login a user. (sets JWT `access_token` & `refresh_token` cookies)
@@ -183,6 +207,8 @@ Response payload:
 ```
 
 
+<br>
+
 #### `DELETE /token`
 Logout a user. (unsets JWT `access_token` & `refresh_token` cookies)
 
@@ -190,6 +216,8 @@ Protection: None
 
 Response payload: None
 
+
+<br>
 
 #### `GET /refresh`
 Refresh JWT access token. (gets new `access_token` cookie using `refresh_token` cookie)
@@ -199,9 +227,13 @@ Protection: Must be logged in
 Response payload: None
 
 
+<br>
+
 ### Questions service
 
 Prefix for API path: `/api/questions`
+
+<br>
 
 #### `POST /questions`
 Creates a new question.
@@ -231,6 +263,8 @@ async def create_question(r: CreateQuestionRequest) -> CreateQuestionResponse:
     question_id = str(uuid.uuid4())
 
 
+<br>
+
 #### `GET /questions/{question_id}`
 Get specific question by its question ID.
 
@@ -247,6 +281,8 @@ Response payload:
 }
 ```
 
+
+<br>
 
 #### `GET /questions_all`
 Get list of all questions.
@@ -266,6 +302,8 @@ Response payload:
 ]
 ```
 
+
+<br>
 
 #### `PUT /questions`
 Update a specific question by its question ID (which is in the payload).
@@ -290,6 +328,8 @@ Response payload:
 }
 ```
 
+
+<br>
 
 #### `DELETE /questions/{question_id}`
 Delete a question by its question ID.
