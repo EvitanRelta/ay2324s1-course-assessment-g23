@@ -62,10 +62,10 @@ Response payload:
 ```
 
 Cases & status codes:
-- Success: 201 Created
+- Success: `201 Created`
 - Error:
-    - Invalid data: 400 Bad Request
-    - Username/email already exists: 409 Conflict
+    - Invalid data: `400 Bad Request`
+    - Username/email already exists: `409 Conflict`
 
 <br>
 
@@ -85,10 +85,10 @@ Response payload:
 ```
 
 Cases & status codes:
-- Success: 200 OK
+- Success: `200 OK`
 - Error:
-    - Not logged in / Invalid JWT token: 401 Unauthorized
-    - User not found: 404 Not Found
+    - Not logged in / Invalid JWT token: `401 Unauthorized`
+    - User not found: `404 Not Found`
 
 <br>
 
@@ -108,10 +108,10 @@ Response payload:
 ```
 
 Cases & status codes:
-- Success: 200 OK
+- Success: `200 OK`
 - Error:
-    - Not logged in / Invalid JWT token: 401 Unauthorized
-    - User not found: 404 Not Found
+    - Not logged in / Invalid JWT token: `401 Unauthorized`
+    - User not found: `404 Not Found`
 
 <br>
 
@@ -133,10 +133,10 @@ Response payload:
 ```
 
 Cases & status codes:
-- Success: 200 OK
+- Success: `200 OK`
 - Error:
-    - Not logged in / Invalid JWT token: 401 Unauthorized
-    - Not a maintainer: 403 Forbidden
+    - Not logged in / Invalid JWT token: `401 Unauthorized`
+    - Not a maintainer: `403 Forbidden`
 
 <br>
 
@@ -153,10 +153,10 @@ Response payload:
 ```
 
 Cases & status codes:
-- Success: 200 OK
+- Success: `200 OK`
 - Error:
-    - Not logged in / Invalid JWT token: 401 Unauthorized
-    - Not a maintainer: 403 Forbidden
+    - Not logged in / Invalid JWT token: `401 Unauthorized`
+    - Not a maintainer: `403 Forbidden`
 
 <br>
 
@@ -173,11 +173,11 @@ Response payload:
 ```
 
 Cases & status codes:
-- Success: 200 OK
+- Success: `200 OK`
 - Error:
-    - Not logged in / Invalid JWT token: 401 Unauthorized
-    - Not same user nor maintainer: 403 Forbidden
-    - User not found: 404 Not Found
+    - Not logged in / Invalid JWT token: `401 Unauthorized`
+    - Not same user nor maintainer: `403 Forbidden`
+    - User not found: `404 Not Found`
 
 <br>
 
@@ -204,14 +204,14 @@ Response payload:
 
 Cases & status codes:
 - Success:
-    - With some or all fields: 200 OK
-    - With no fields: 200 OK
+    - With some or all fields: `200 OK`
+    - With no fields: `200 OK`
 - Error:
-    - Not logged in / Invalid JWT token: 401 Unauthorized
-    - Not same user nor maintainer: 403 Forbidden
-    - User not found: 404 Not Found
-    - Invalid data: 400 Bad Request
-    - Username/email already exists: 409 Conflict
+    - Not logged in / Invalid JWT token: `401 Unauthorized`
+    - Not same user nor maintainer: `403 Forbidden`
+    - User not found: `404 Not Found`
+    - Invalid data: `400 Bad Request`
+    - Username/email already exists: `409 Conflict`
 
 <br>
 
@@ -235,12 +235,12 @@ Response payload:
 ```
 
 Cases & status codes:
-- Success: 200 OK
+- Success: `200 OK`
 - Error:
-    - Not logged in / Invalid JWT token: 401 Unauthorized
-    - Not a maintainer: 403 Forbidden
-    - User not found: 404 Not Found
-    - Invalid role: 400 Bad Request
+    - Not logged in / Invalid JWT token: `401 Unauthorized`
+    - Not a maintainer: `403 Forbidden`
+    - User not found: `404 Not Found`
+    - Invalid role: `400 Bad Request`
 
 <br>
 
@@ -265,9 +265,9 @@ Response payload:
 ```
 
 Cases & status codes:
-- Success: 200 OK
+- Success: `200 OK`
 - Error:
-    - Invalid credentials: 401 Unauthorized
+    - Invalid credentials: `401 Unauthorized`
 
 <br>
 
@@ -279,7 +279,7 @@ Protection: None
 Response payload: None
 
 Cases & status codes:
-- Always: 204 No Content
+- Always: `204 No Content`
 
 <br>
 
@@ -291,10 +291,10 @@ Protection: Must be logged in
 Response payload: None
 
 Cases & status codes:
-- Success: 204 No Content
+- Success: `204 No Content`
 - Error:
-    - Not logged in / Invalid JWT token: 401 Unauthorized
-    - Invalid refresh token: 403 Forbidden
+    - Not logged in / Invalid JWT token: `401 Unauthorized`
+    - Invalid refresh token: `403 Forbidden`
 
 <br>
 
@@ -327,12 +327,12 @@ Response payload:
 ```
 
 Cases & status codes:
-- Success: 201 Created
+- Success: `201 Created`
 - Error:
-    - Not logged in / Invalid JWT token: 401 Unauthorized
-    - Not a maintainer: 403 Forbidden
-    - Invalid data: 400 Bad Request
-    - Title already exists: 409 Conflict
+    - Not logged in / Invalid JWT token: `401 Unauthorized`
+    - Not a maintainer: `403 Forbidden`
+    - Invalid data: `400 Bad Request`
+    - Title already exists: `409 Conflict`
 
 <br>
 
@@ -353,10 +353,10 @@ Response payload:
 ```
 
 Cases & status codes:
-- Success: 200 OK
+- Success: `200 OK`
 - Error:
-    - Not logged in / Invalid JWT token: 401 Unauthorized
-    - Question not found: 404 Not Found
+    - Not logged in / Invalid JWT token: `401 Unauthorized`
+    - Question not found: `404 Not Found`
 
 <br>
 
@@ -379,9 +379,9 @@ Response payload:
 ```
 
 Cases & status codes:
-- Success: 200 OK
+- Success: `200 OK`
 - Error:
-    - Not logged in / Invalid JWT token: 401 Unauthorized
+    - Not logged in / Invalid JWT token: `401 Unauthorized`
 
 <br>
 
@@ -409,13 +409,13 @@ Response payload:
 ```
 
 Cases & status codes:
-- Success: 200 OK
+- Success: `200 OK`
 - Error:
-    - Not logged in / Invalid JWT token: 401 Unauthorized
-    - Not a maintainer: 403 Forbidden
-    - Question not found: 404 Not Found
-    - Invalid data: 400 Bad Request
-    - Title already exists: 409 Conflict
+    - Not logged in / Invalid JWT token: `401 Unauthorized`
+    - Not a maintainer: `403 Forbidden`
+    - Question not found: `404 Not Found`
+    - Invalid data: `400 Bad Request`
+    - Title already exists: `409 Conflict`
 
 <br>
 
@@ -432,8 +432,8 @@ Response payload:
 ```
 
 Cases & status codes:
-- Success: 200 OK
+- Success: `200 OK`
 - Error:
-    - Not logged in / Invalid JWT token: 401 Unauthorized
-    - Not a maintainer: 403 Forbidden
-    - Question not found: 404 Not Found
+    - Not logged in / Invalid JWT token: `401 Unauthorized`
+    - Not a maintainer: `403 Forbidden`
+    - Question not found: `404 Not Found`
