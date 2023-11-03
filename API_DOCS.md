@@ -64,7 +64,7 @@ Response payload:
 Cases & status codes:
 - Success: `201 Created`
 - Error:
-    - Invalid data: `400 Bad Request`
+    - Invalid payload syntax: `422 Unprocessable Entity`
     - Username/email already exists: `409 Conflict`
 
 <br>
@@ -211,7 +211,7 @@ Cases & status codes:
     - Not logged in / Invalid JWT token: `401 Unauthorized`
     - Not same user nor maintainer: `403 Forbidden`
     - User not found: `404 Not Found`
-    - Invalid data: `400 Bad Request`
+    - Invalid payload syntax: `422 Unprocessable Entity`
     - Username/email already exists: `409 Conflict`
 
 <br>
@@ -241,7 +241,7 @@ Cases & status codes:
     - Not logged in / Invalid JWT token: `401 Unauthorized`
     - Not a maintainer: `403 Forbidden`
     - User not found: `404 Not Found`
-    - Invalid role: `400 Bad Request`
+    - Invalid payload syntax: `422 Unprocessable Entity`
     - Attempting to revoke permission of last maintainer: `409 Conflict`
 
 <br>
@@ -333,7 +333,7 @@ Cases & status codes:
 - Error:
     - Not logged in / Invalid JWT token: `401 Unauthorized`
     - Not a maintainer: `403 Forbidden`
-    - Invalid data: `400 Bad Request`
+    - Invalid payload syntax: `422 Unprocessable Entity`
     - Title already exists: `409 Conflict`
 
 <br>
@@ -416,7 +416,7 @@ Cases & status codes:
     - Not logged in / Invalid JWT token: `401 Unauthorized`
     - Not a maintainer: `403 Forbidden`
     - Question not found: `404 Not Found`
-    - Invalid data: `400 Bad Request`
+    - Invalid payload syntax: `422 Unprocessable Entity`
     - Title already exists: `409 Conflict`
 
 <br>
