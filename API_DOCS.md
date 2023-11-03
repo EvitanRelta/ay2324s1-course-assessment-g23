@@ -88,7 +88,6 @@ Cases & status codes:
 - Success: `200 OK`
 - Error:
     - Not logged in / Invalid JWT token: `401 Unauthorized`
-    - User not found: `404 Not Found`
 
 <br>
 
