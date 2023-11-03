@@ -139,26 +139,6 @@ Cases & status codes:
 
 <br>
 
-### `DELETE /users_all`
-Delete all users.
-
-Protection: Must be maintainer
-
-Response payload:
-```json
-{
-    "message": "Delete all users message",
-}
-```
-
-Cases & status codes:
-- Success: `200 OK`
-- Error:
-    - Not logged in / Invalid JWT token: `401 Unauthorized`
-    - Not a maintainer: `403 Forbidden`
-
-<br>
-
 ### `DELETE /users/{user_id}`
 Delete specific user by their user ID.
 
