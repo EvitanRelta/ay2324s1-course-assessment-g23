@@ -275,7 +275,6 @@ Cases & status codes:
 - Success: `204 No Content`
 - Error:
     - Not logged in / Invalid JWT token: `401 Unauthorized`
-    - Invalid refresh token: `403 Forbidden`
 
 <br>
 
