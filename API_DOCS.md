@@ -1,12 +1,12 @@
 # Makeshift docs for all APIs
 
-## Todo
+# Todo
 - For each API, write the error payload format.
 - Implement/Ensure all APIs follow the status codes.
 
 <br>
 
-## API format
+# API format
 All the APIs have the form: `/api/[SERVICE_NAME]/[API_PATH]`
 
 For example:
@@ -21,7 +21,7 @@ For example:
 
 <br>
 
-## API-endpoints
+# API-endpoints
 
 `GET` and `DELETE` HTTP requests will not have any request-payload.
 
@@ -34,13 +34,13 @@ For example:
 
 <br>
 
-### Users service
+## Users service
 
 Prefix for API path: `/api/users`
 
 <br>
 
-#### `POST /users`
+### `POST /users`
 Signup/Creates a new user.
 
 Protection: None
@@ -69,7 +69,7 @@ Cases & status codes:
 
 <br>
 
-#### `GET /user_me`
+### `GET /user_me`
 Get user details of the currently logged-in user.
 
 Protection: Must be logged in
@@ -92,7 +92,7 @@ Cases & status codes:
 
 <br>
 
-#### `GET /users/{user_id}`
+### `GET /users/{user_id}`
 Get user details of a specific user by their user ID.
 
 Protection: Must be logged in
@@ -115,7 +115,7 @@ Cases & status codes:
 
 <br>
 
-#### `GET /users_all`
+### `GET /users_all`
 Get list of all users' details.
 
 Protection: Must be maintainer
@@ -140,7 +140,7 @@ Cases & status codes:
 
 <br>
 
-#### `DELETE /users_all`
+### `DELETE /users_all`
 Delete all users.
 
 Protection: Must be maintainer
@@ -160,7 +160,7 @@ Cases & status codes:
 
 <br>
 
-#### `DELETE /users/{user_id}`
+### `DELETE /users/{user_id}`
 Delete specific user by their user ID.
 
 Protection: Must be same user or maintainer
@@ -181,7 +181,7 @@ Cases & status codes:
 
 <br>
 
-#### `PUT /users/{user_id}`
+### `PUT /users/{user_id}`
 Update a specific user's details.
 
 Protection: Must be same user or maintainer
@@ -215,7 +215,7 @@ Cases & status codes:
 
 <br>
 
-#### `PUT /users_role/{user_id}`
+### `PUT /users_role/{user_id}`
 Update a specific user's role.
 
 Protection: Must be maintainer
@@ -244,7 +244,7 @@ Cases & status codes:
 
 <br>
 
-#### `POST /token`
+### `POST /token`
 Login a user. (sets JWT `access_token` & `refresh_token` cookies)
 
 Protection: None
@@ -271,7 +271,7 @@ Cases & status codes:
 
 <br>
 
-#### `DELETE /token`
+### `DELETE /token`
 Logout a user. (unsets JWT `access_token` & `refresh_token` cookies)
 
 Protection: None
@@ -283,7 +283,7 @@ Cases & status codes:
 
 <br>
 
-#### `GET /refresh`
+### `GET /refresh`
 Refresh JWT access token. (gets new `access_token` cookie using `refresh_token` cookie)
 
 Protection: Must be logged in
@@ -298,13 +298,13 @@ Cases & status codes:
 
 <br>
 
-### Questions service
+## Questions service
 
 Prefix for API path: `/api/questions`
 
 <br>
 
-#### `POST /questions`
+### `POST /questions`
 Creates a new question.
 
 Protection: Must be maintainer
@@ -336,7 +336,7 @@ Cases & status codes:
 
 <br>
 
-#### `GET /questions/{question_id}`
+### `GET /questions/{question_id}`
 Get specific question by its question ID.
 
 Protection: Must be logged in
@@ -360,7 +360,7 @@ Cases & status codes:
 
 <br>
 
-#### `GET /questions_all`
+### `GET /questions_all`
 Get list of all questions.
 
 Protection: Must be logged in
@@ -385,7 +385,7 @@ Cases & status codes:
 
 <br>
 
-#### `PUT /questions`
+### `PUT /questions`
 Update a specific question by its question ID (which is in the payload).
 
 Protection: Must be maintainer
@@ -419,7 +419,7 @@ Cases & status codes:
 
 <br>
 
-#### `DELETE /questions/{question_id}`
+### `DELETE /questions/{question_id}`
 Delete a question by its question ID.
 
 Protection: Must be maintainer
