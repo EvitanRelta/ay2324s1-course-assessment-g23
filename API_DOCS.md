@@ -178,6 +178,7 @@ Cases & status codes:
     - Not logged in / Invalid JWT token: `401 Unauthorized`
     - Not same user nor maintainer: `403 Forbidden`
     - User not found: `404 Not Found`
+    - Attempting to delete last maintainer: `409 Conflict`
 
 <br>
 
@@ -241,6 +242,7 @@ Cases & status codes:
     - Not a maintainer: `403 Forbidden`
     - User not found: `404 Not Found`
     - Invalid role: `400 Bad Request`
+    - Attempting to revoke permission of last maintainer: `409 Conflict`
 
 <br>
 
