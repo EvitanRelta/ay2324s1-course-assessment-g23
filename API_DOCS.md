@@ -267,14 +267,14 @@ Cases & status codes:
 ### `GET /refresh`
 Refresh JWT access token. (gets new `access_token` cookie using `refresh_token` cookie)
 
-Protection: Must be logged in
+Protection: None
 
 Response payload: None
 
 Cases & status codes:
 - Success: `204 No Content`
 - Error:
-    - Not logged in / Invalid JWT token: `401 Unauthorized`
+    - Invalid JWT refresh token: `401 Unauthorized`
 
 <br>
 
