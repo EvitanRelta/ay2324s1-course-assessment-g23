@@ -8,9 +8,9 @@ class CreateUser(BaseModel):
 
 class UpdateUserInfo(BaseModel):
     user_id: str
-    username: str
-    password: str
-    email: str
+    username: Optional[str] = None
+    password: Optional[str] = None
+    email: Optional[str] = None
 
 class CreateQuestion(BaseModel):
     title: str
