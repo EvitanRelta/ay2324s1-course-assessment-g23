@@ -17,6 +17,8 @@ export const UserTable: React.FC = () => {
         password: '',
         email: '',
     })
+    // To track the original user detail values.
+    const [currentEditUser, setCurrentEditUser] = useState<User | null>(null)
     const [editFormData, setEditFormData] = useState<User | null>(null)
 
     const handleAddFormChange = (
@@ -52,16 +54,30 @@ export const UserTable: React.FC = () => {
         event.preventDefault()
 
         if (!editFormData) return
-        updateUserMutation.mutate(editFormData)
+
+        const diff: Partial<Omit<User, 'user_id'>> = {}
+        for (const key in editFormData) {
+            // @ts-ignore
+            if (editFormData[key] !== currentEditUser![key]) {
+                // @ts-ignore
+                diff[key] = editFormData[key]
+            }
+        }
+        if (Object.keys(diff).length > 0)
+            updateUserMutation.mutate({ user_id: currentEditUser!.user_id, ...diff })
+
+        setCurrentEditUser(null)
         setEditFormData(null)
     }
 
     const handleEditClick = (event: React.MouseEvent<HTMLButtonElement>, user: User) => {
         event.preventDefault()
+        setCurrentEditUser(user)
         setEditFormData(user)
     }
 
     const handleCancelClick = () => {
+        setCurrentEditUser(null)
         setEditFormData(null)
     }
 
