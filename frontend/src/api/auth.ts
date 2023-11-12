@@ -1,7 +1,7 @@
 import { ApiError } from './error'
 
 /** URL for authentication API. */
-const AUTH_API_URL = '/api/users'
+const AUTH_API_URL = 'http://localhost:8001'
 
 /** HTTP request headers for authentication API. */
 const AUTH_API_HEADER = { 'Content-Type': 'application/json' }
@@ -65,3 +65,4 @@ export async function refreshAccessToken(): Promise<void> {
 
     if (!response.ok) throw await ApiError.parseResponse(response)
 }
+

@@ -1,7 +1,7 @@
 import { ApiError } from './error'
 
 /** URL for question bank API. */
-const QUESTION_API_URL = '/api/questions'
+const QUESTION_API_URL = 'http://localhost:8000'
 
 /** HTTP request headers for question bank API. */
 const QUESTION_API_HEADER = { 'Content-Type': 'application/json' }
@@ -129,3 +129,4 @@ export async function deleteAllQuestions(): Promise<void> {
 
     if (!response.ok) throw await ApiError.parseResponse(response)
 }
+

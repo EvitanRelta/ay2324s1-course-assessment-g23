@@ -11,7 +11,7 @@ def _get_env_variable(key: str) -> str:
 
 HOST = _get_env_variable("POSTGRES_HOST")
 PORT = _get_env_variable("POSTGRES_PORT")
-DATABASE = _get_env_variable("POSTGRES_DB")
+DATABASE = _get_env_variable("POSTGRES_QUESTIONS_DB")
 USER = _get_env_variable("POSTGRES_USER")
 PASSWORD = _get_env_variable("POSTGRES_PASSWORD")
 
