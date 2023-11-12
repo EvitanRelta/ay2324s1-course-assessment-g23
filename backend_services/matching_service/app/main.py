@@ -2,7 +2,7 @@ import asyncio
 import logging
 import pprint
 
-from fastapi import FastAPI, WebSocket, WebSocketDisconnect
+from fastapi import Depends, FastAPI, WebSocket, WebSocketDisconnect
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.websockets import WebSocketState
 import uuid
@@ -14,6 +14,7 @@ from data_classes import (
     UserWebSocket,
     UserWebSocketQueue,
 )
+from shared_definitions.auth.fastapi_dependencies import require_logged_in
 
 
 TIMEOUT_MESSAGE = "Timed out. Couldn't find a match."
@@ -42,7 +43,7 @@ queues: dict[Complexity, UserWebSocketQueue] = {
 }
 
 
-@app.websocket("/matching")
+@app.websocket("/matching", dependencies=[Depends(require_logged_in)])
 async def websocket_endpoint(websocket: WebSocket):
     await websocket.accept()
     try:
