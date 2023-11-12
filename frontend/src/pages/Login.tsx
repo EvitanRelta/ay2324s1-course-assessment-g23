@@ -1,13 +1,14 @@
 import '../styles/LoginPage.css'
 import { Link, useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import { useLoginUser, useSessionDetails } from '../stores/sessionStore'
+import { useLoginUser } from '../stores/sessionStore'
 import AlertMessage from '../components/AlertMessage'
 import {motion} from 'framer-motion';
+import { useCurrentUser } from '../stores/userStore'
 
 
 const Login = () => {
-    const { data: sessionDetails } = useSessionDetails()
+    const { data: user } = useCurrentUser()
     const loginUserMutation = useLoginUser()
     const navigate = useNavigate()
     const [username, setUsername] = useState('')
@@ -16,9 +17,9 @@ const Login = () => {
 
     // Redirect if already logged in.
     useEffect(() => {
-        const isLoggedIn = sessionDetails !== null
+        const isLoggedIn = user !== null
         if (isLoggedIn) navigate('/questions')
-    }, [sessionDetails, navigate])
+    }, [user, navigate])
 
     const handleLogin = async () => {
         await loginUserMutation.mutateAsync({ username, password })

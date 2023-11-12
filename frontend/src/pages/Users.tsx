@@ -2,17 +2,17 @@ import UserTable from '../components/UserTable/UserTable.tsx'
 import Navbar from '../components/Navbar.tsx'
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useSessionDetails } from '../stores/sessionStore.ts'
+import { useCurrentUser } from '../stores/userStore.ts'
 
 const Users = () => {
-    const { data: sessionDetails } = useSessionDetails()
+    const { data: user } = useCurrentUser()
     const navigate = useNavigate()
 
     // Redirect if not logged in.
     useEffect(() => {
-        const hasAccessToPage = sessionDetails !== null && sessionDetails.role === 'maintainer'
+        const hasAccessToPage = user !== null && user.role === 'maintainer'
         if (!hasAccessToPage) navigate('/')
-    }, [sessionDetails, navigate])
+    }, [user, navigate])
 
     return (
         <div>

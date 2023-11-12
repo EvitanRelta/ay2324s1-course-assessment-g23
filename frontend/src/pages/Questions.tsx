@@ -2,20 +2,20 @@ import { QuestionTable } from '../components/QuestionTable/QuestionTable.tsx'
 import Navbar from '../components/Navbar.tsx'
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useSessionDetails } from '../stores/sessionStore.ts'
 import MatchBar from '../components/MatchBar.tsx'
+import { useCurrentUser } from '../stores/userStore.ts'
 
 const Questions = () => {
-    const { data: sessionDetails } = useSessionDetails()
-    const isUser = sessionDetails?.role === 'normal'
+    const { data: user } = useCurrentUser()
+    const isUser = user?.role === 'normal'
 
     const navigate = useNavigate()
 
     // Redirect if not logged in.
     useEffect(() => {
-        const isNotLoggedIn = sessionDetails === null
+        const isNotLoggedIn = user === null
         if (isNotLoggedIn) navigate('/')
-    }, [sessionDetails, navigate])
+    }, [user, navigate])
 
     return (
         <>
