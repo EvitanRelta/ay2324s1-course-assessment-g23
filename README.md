@@ -1,2 +1,28 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/6BOvYMwN)
-# AssignmentTemplate
+# Assignment 1
+
+## Setup instructions
+
+- Install NodeJS 16.13.1
+
+- Navigate to `frontend` dir:
+
+  ```bash
+  cd frontend
+  ```
+
+- Install frontend dependencies:
+
+  ```bash
+  npm install
+  ```
+
+- Start frontend development server:
+
+  ```bash
+  npm run dev
+  ```
+
+<br>
+
+### Accessing the web app
+After starting the development server, the web app will be accessible at: `http://localhost:80`.
