@@ -17,9 +17,5 @@ if [ "$(docker volume ls | grep questions-data)" == "" ]; then
     docker volume create questions-data
 fi
 
-# Remove CR (ie. \r) characters from `judge0.conf`, as judge0 server crashes if
-# it does; and Git keeps adding them back when Git's `autocrlf` is set to "input".
-sed -i 's/\r//g' "./backend_services/code_execution_service/judge0/judge0.conf"
-
 # Rebuild and (re)start the services, removing orphan containers in the process.
 docker compose --env-file .env up --build --remove-orphans "$@"
