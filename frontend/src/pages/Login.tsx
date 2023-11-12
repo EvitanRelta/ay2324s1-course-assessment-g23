@@ -8,7 +8,7 @@ import { useCurrentUser } from '../stores/userStore'
 
 
 const Login = () => {
-    const { data: user } = useCurrentUser()
+    const { data: user, isFetching: isFetchingCurrentUser } = useCurrentUser()
     const loginUserMutation = useLoginUser()
     const navigate = useNavigate()
     const [username, setUsername] = useState('')
@@ -18,8 +18,8 @@ const Login = () => {
     // Redirect if already logged in.
     useEffect(() => {
         const isLoggedIn = user !== null
-        if (isLoggedIn) navigate('/questions')
-    }, [user, navigate])
+        if (isLoggedIn && !isFetchingCurrentUser) navigate('/questions')
+    }, [user, isFetchingCurrentUser, navigate])
 
     const handleLogin = async () => {
         await loginUserMutation.mutateAsync({ username, password })

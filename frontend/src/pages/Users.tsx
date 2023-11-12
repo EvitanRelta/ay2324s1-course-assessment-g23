@@ -5,14 +5,14 @@ import { useNavigate } from 'react-router-dom'
 import { useCurrentUser } from '../stores/userStore.ts'
 
 const Users = () => {
-    const { data: user } = useCurrentUser()
+    const { data: user, isFetching: isFetchingCurrentUser } = useCurrentUser()
     const navigate = useNavigate()
 
     // Redirect if not logged in.
     useEffect(() => {
         const hasAccessToPage = user !== null && user.role === 'maintainer'
-        if (!hasAccessToPage) navigate('/')
-    }, [user, navigate])
+        if (!hasAccessToPage && !isFetchingCurrentUser) navigate('/')
+    }, [user, isFetchingCurrentUser, navigate])
 
     return (
         <div>

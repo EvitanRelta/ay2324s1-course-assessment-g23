@@ -5,14 +5,14 @@ import { useNavigate } from 'react-router-dom'
 import { useCurrentUser } from '../stores/userStore.ts'
 
 const Questions = () => {
-    const { data: user } = useCurrentUser()
+    const { data: user, isFetching: isFetchingCurrentUser } = useCurrentUser()
     const navigate = useNavigate()
 
     // Redirect if not logged in.
     useEffect(() => {
         const isNotLoggedIn = user === null
-        if (isNotLoggedIn) navigate('/')
-    }, [user, navigate])
+        if (isNotLoggedIn && !isFetchingCurrentUser) navigate('/')
+    }, [user, isFetchingCurrentUser, navigate])
 
     return (
         <>
