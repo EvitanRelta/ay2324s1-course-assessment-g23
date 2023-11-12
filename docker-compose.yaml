@@ -1,6 +1,4 @@
 version: "3"
-include:
-  - backend_services/code_execution_service/judge0/docker-compose.yml
 services:
   api_gateway:
     container_name: api_gateway
@@ -14,9 +12,6 @@ services:
       - users_api
       - questions_api
       - matching_api
-      - collaboration_api
-      - communication_api
-      - code_execution_api
     networks:
       - client-side
       - backend-apis
@@ -76,33 +71,6 @@ services:
       - base_api
     env_file:
       - ./backend.conf
-  collaboration_api:
-    build:
-      context: ./backend_services/collaboration_service
-    image: peerprep_collaboration_api
-    container_name: collaboration_api
-    ports:
-          - 8004:8000
-    networks:
-      - backend-apis
-      - collaboration
-    depends_on:
-      - base_api
-    env_file:
-      - ./backend.conf
-  communication_api:
-    build:
-      context: ./backend_services/communication_service
-      dockerfile: Dockerfile
-    image: peerprep_communication_api
-    container_name: communication_api
-    networks:
-      - backend-apis
-      - communication
-    depends_on:
-      - base_api
-    env_file:
-      - ./backend.conf
   matching_api:
     build:
       context: ./backend_services/matching_service
@@ -113,25 +81,6 @@ services:
       - backend-apis
       - matching-queue
     depends_on:
-      - base_api
-    env_file:
-      - ./backend.conf
-  code_execution_api:
-    build:
-      context: ./backend_services/code_execution_service
-      dockerfile: ../API_Dockerfile
-    image: peerprep_code_execution_api
-    container_name: code_execution_api
-    ports:
-      - 8007:8000
-    networks:
-      - backend-apis
-      - judge0
-    environment:
-      - JUDGE0_HOST=judge0_server
-      - JUDGE0_PORT=2358
-    depends_on:
-      - judge0_server
       - base_api
     env_file:
       - ./backend.conf
@@ -174,5 +123,3 @@ networks:
   client-side:
   backend-apis:
   matching-queue:
-  collaboration:
-  communication:
