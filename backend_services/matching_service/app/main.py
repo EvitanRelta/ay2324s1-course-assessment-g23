@@ -1,9 +1,10 @@
 import asyncio
+import logging
+import pprint
+import random
+import uuid
 
-from fastapi import FastAPI, WebSocket, WebSocketDisconnect
-from fastapi.middleware.cors import CORSMiddleware
-from fastapi.websockets import WebSocketState
-
+import requests
 from data_classes import (
     Complexity,
     MatchRequest,
@@ -11,7 +12,9 @@ from data_classes import (
     UserWebSocket,
     UserWebSocketQueue,
 )
-
+from fastapi import Cookie, FastAPI, WebSocket, WebSocketDisconnect
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.websockets import WebSocketState
 
 TIMEOUT_MESSAGE = "Timed out. Couldn't find a match."
 CANCEL_MESSAGE = "Queuing cancelled."
@@ -20,6 +23,7 @@ SUCCESS_MESSAGE = "Match found!"
 QUEUE_TIMEOUT_SECONDS: int = 30
 """Seconds before a queued user times out and gets removed from the queue."""
 
+logging.basicConfig(level=logging.INFO)
 
 app = FastAPI()
 app.add_middleware(
@@ -38,25 +42,30 @@ queues: dict[Complexity, UserWebSocketQueue] = {
 }
 
 
-@app.websocket("/ws/matching")
-async def websocket_endpoint(websocket: WebSocket):
+@app.websocket("/matching")
+async def websocket_endpoint(websocket: WebSocket, access_token: str | None = Cookie(None)):
+    assert access_token is not None
     await websocket.accept()
     try:
         while True:
             json_data = await websocket.receive_json()
             payload = MatchRequest(**json_data)
-            user = UserWebSocket(user_id=payload.user_id, websocket=websocket)
+            user = UserWebSocket(
+                user_id=payload.user_id, websocket=websocket, access_token=access_token
+            )
 
             match payload.action:
                 case "queue":
                     assert payload.complexity is not None, "Missing `complexity` in queue payload."
                     await handle_queue(payload.complexity, user)
+                    logging.info("[queued] Queues:\n%s", pprint.pformat(queues, width=-1))
                 case "cancel":
                     await handle_cancel(user)
+                    logging.info("[cancelled] Queues:\n%s", pprint.pformat(queues, width=-1))
 
     # Ignore exceptions related to websocket disconnecting.
     except WebSocketDisconnect:
-        pass
+        logging.info("[disconnected] Queues:\n%s", pprint.pformat(queues, width=-1))
     except RuntimeError as e:
         if "WebSocket is not connected" in str(e):
             return
@@ -79,11 +88,27 @@ async def handle_queue(complexity: Complexity, user_1: UserWebSocket) -> None:
     user_2 = queue.pop()
     user_2.timeout_task.cancel()
 
+    new_room_id = str(uuid.uuid4())
+
+    session = requests.Session()
+    cookie = {"access_token": user_1.access_token}
+    session.cookies.update(cookie)
+    question_url = "http://api_gateway/api/questions/questions_all"
+    response = session.get(question_url)
+    all_questions = response.json()
+    filtered_questions = [
+        question for question in all_questions if question["complexity"].lower() == complexity
+    ]
+    random_question = random.choice(filtered_questions)
+    rand_question_id = random_question["question_id"]
+
     await user_1.websocket.send_json(
         MatchResponse(
             is_matched=True,
             detail=SUCCESS_MESSAGE,
             user_id=user_2.user_id,
+            room_id=new_room_id,
+            question_id=rand_question_id,
         ).model_dump(mode="json")
     )
     await user_2.websocket.send_json(
@@ -91,6 +116,8 @@ async def handle_queue(complexity: Complexity, user_1: UserWebSocket) -> None:
             is_matched=True,
             detail=SUCCESS_MESSAGE,
             user_id=user_1.user_id,
+            room_id=new_room_id,
+            question_id=rand_question_id,
         ).model_dump(mode="json")
     )
 
