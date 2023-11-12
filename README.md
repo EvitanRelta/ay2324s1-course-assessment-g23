@@ -1,2 +1,19 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/6BOvYMwN)
-# AssignmentTemplate
+# Assignment 4
+
+## Setup instructions
+
+- Install Docker (version >=24.0.5) and Docker Desktop (version >=4.22.1).
+
+- Download the `.env` file that we've submitted to Canvas CS3219's "Sharing Assignment Private Info" assignment, and place it in the root of the repo.
+
+- Start the app via the `start_containers.sh` script:
+  ```bash
+  bash start_containers.sh
+  ```
+
+  (if it fails to start, try doing `docker-compose down` to remove old containers)
+
+<br>
+
+### Accessing the web app
+After starting containers, the web app will be accessible at: `http://localhost`.
