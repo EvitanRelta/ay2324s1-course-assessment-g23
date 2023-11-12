@@ -3,14 +3,19 @@ import os
 import traceback
 from fastapi import HTTPException
 
+def _get_env_variable(key: str) -> str:
+    value = os.getenv(key)
+    assert value is not None, f'Environment variable "{key}" not found.'
+    return value
+
 def connect():
     try:
         conn = psycopg2.connect(
-            host=os.getenv("POSTGRES_HOST"),
-            port=os.getenv("POSTGRES_PORT"),
-            database=os.getenv("POSTGRES_DB"),
-            user=os.getenv("POSTGRES_USER"),
-            password= os.getenv("POSTGRES_PASSWORD"))
+            host=_get_env_variable("POSTGRES_HOST"),
+            port=_get_env_variable("POSTGRES_PORT"),
+            database=_get_env_variable("POSTGRES_DB"),
+            user=_get_env_variable("POSTGRES_USER"),
+            password= _get_env_variable("POSTGRES_PASSWORD"))
         return conn
     except Exception:
         traceback.print_exc()
