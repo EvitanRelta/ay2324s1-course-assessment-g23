@@ -1,6 +1,7 @@
 from data_classes import MessagePayload, Room, UserWebSocket
-from fastapi import FastAPI, WebSocket, WebSocketDisconnect
+from fastapi import Depends, FastAPI, WebSocket, WebSocketDisconnect
 from fastapi.middleware.cors import CORSMiddleware
+from shared_definitions.auth.fastapi_dependencies import require_logged_in
 
 # create app
 app = FastAPI()
@@ -18,7 +19,7 @@ rooms: dict[str, Room] = {}
 """Dict where keys are the room-ID, values are the room's info."""
 
 
-@app.websocket("/communication/{room_id}/{user_id}")
+@app.websocket("/communication/{room_id}/{user_id}", dependencies=[Depends(require_logged_in)])
 async def join_communication_channel(websocket: WebSocket, room_id: str, user_id: str):
     global rooms
 
@@ -140,7 +141,7 @@ async def join_communication_channel(websocket: WebSocket, room_id: str, user_id
 clients = []
 
 
-@app.websocket("/communication_video/{room_id}/{user_id}")
+@app.websocket("/communication_video/{room_id}/{user_id}", dependencies=[Depends(require_logged_in)])
 async def join_video_channel(websocket: WebSocket, room_id: str, user_id: str):
     global clients
 

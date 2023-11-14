@@ -12,9 +12,10 @@ from data_classes import (
     UserWebSocket,
     UserWebSocketQueue,
 )
-from fastapi import Cookie, FastAPI, WebSocket, WebSocketDisconnect
+from fastapi import Cookie, Depends, FastAPI, WebSocket, WebSocketDisconnect
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.websockets import WebSocketState
+from shared_definitions.auth.fastapi_dependencies import require_logged_in
 
 TIMEOUT_MESSAGE = "Timed out. Couldn't find a match."
 CANCEL_MESSAGE = "Queuing cancelled."
@@ -42,7 +43,7 @@ queues: dict[Complexity, UserWebSocketQueue] = {
 }
 
 
-@app.websocket("/matching")
+@app.websocket("/matching", dependencies=[Depends(require_logged_in)])
 async def websocket_endpoint(websocket: WebSocket, access_token: str | None = Cookie(None)):
     assert access_token is not None
     await websocket.accept()
