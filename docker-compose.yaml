@@ -106,8 +106,6 @@ services:
       dockerfile: ../API_Dockerfile
     image: peerprep_code_execution_api
     container_name: code_execution_api
-    ports:
-      - 8007:8000
     networks:
       - backend-apis
       - judge0
