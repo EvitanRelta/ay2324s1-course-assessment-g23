@@ -4,6 +4,10 @@ import { tags } from '@lezer/highlight'
 import { Extension } from '@codemirror/state'
 import { EditorView } from '@codemirror/view'
 
+// Code editor theme is referenced from
+// https://github.com/ivqonsanada/codemirror6-themes
+// https://github.com/upleveled/theme-vs-code-dark-plus
+
 const ivory = '#abb2bf',
     darkBackground = '#21252b',
     highlightBackground = '#242424',
@@ -30,7 +34,6 @@ const ivory = '#abb2bf',
     numbersAndUnits = '#b5cea8',
     metaAndComments = '#6a9955'
 
-/// The editor theme styles for Material Darker.
 export const materialDarkerTheme = EditorView.theme(
     {
         '&': {
