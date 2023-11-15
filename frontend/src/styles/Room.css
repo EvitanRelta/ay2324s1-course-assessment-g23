@@ -213,21 +213,25 @@
     background-color: #3d1c1c;
     color: #db4242;
     height: 100%;
+    max-height: 300px;
     margin: 15px;
     padding: 10px;
     border-radius: 5px;
     font-family: 'Roboto Mono', serif;
     white-space: pre-wrap;
+    overflow: scroll;
 }
 
 .code-output {
     background-color: #353535;
     height: 100%;
+    max-height: 300px;
     margin: 15px;
     padding: 10px;
     border-radius: 5px;
     font-family: 'Roboto Mono', serif;
     white-space: pre-wrap;
+    overflow: scroll;
 }
 
 .empty-result {
