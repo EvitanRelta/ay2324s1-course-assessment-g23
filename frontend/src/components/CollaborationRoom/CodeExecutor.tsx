@@ -8,11 +8,10 @@ const CodeExecutor: React.FC = () => {
     const executeCodeMutation = useExecuteCode()
     const [isOutputOpen, setIsOutputOpen] = useState(false)
     const { isLoading: isExecuting } = executeCodeMutation
-    const [hasCodeResult, setHasCodeResult] = useState(false)
+    const hasCodeResult = codeExecutionOutput !== null
 
     const handleExecute = async () => {
         setIsOutputOpen(true)
-        setHasCodeResult(true)
         await executeCodeMutation.mutateAsync()
     }
 
@@ -89,34 +88,24 @@ const CodeExecutor: React.FC = () => {
                                     }}
                                 />
                             </div>
+                        ) : !hasCodeResult ? (
+                            <div className='empty-result'>To execute code, click 'Run'</div>
                         ) : (
                             <>
-                                {codeExecutionOutput?.stderr ? (
-                                    <>
-                                        <div className='result-header-error'>
-                                            Code Execution Failed
-                                        </div>
-                                        <div className='error-output'>
-                                            {codeExecutionOutput.stderr}
-                                        </div>
-                                    </>
+                                {codeExecutionOutput.hasError ? (
+                                    <div className='result-header-error'>Code Execution Failed</div>
                                 ) : (
-                                    <>
-                                        {!hasCodeResult ? (
-                                            <div className='empty-result'>
-                                                To execute code, click 'Run'
-                                            </div>
-                                        ) : (
-                                            <>
-                                                <div className='result-header-success'>
-                                                    Code Execution Success
-                                                </div>
-                                                <div className='code-output'>
-                                                    {codeExecutionOutput?.stdout}
-                                                </div>
-                                            </>
-                                        )}
-                                    </>
+                                    <div className='result-header-success'>
+                                        Code Execution Success
+                                    </div>
+                                )}
+                                {codeExecutionOutput.stdout && (
+                                    <div className='code-output'>{codeExecutionOutput.stdout}</div>
+                                )}
+                                {codeExecutionOutput.errorMessage && (
+                                    <div className='error-output'>
+                                        {codeExecutionOutput.errorMessage}
+                                    </div>
                                 )}
                             </>
                         )}

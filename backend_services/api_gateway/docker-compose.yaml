@@ -24,23 +24,28 @@ services:
       - collaboration_api
       - communication_api
       - code_execution_api
+      - traffic_monitor
     networks:
       - client-side
       - backend-apis
+      - monitor_net
 
   traffic_monitor:
     container_name: traffic_monitor
-    image: allinurl/goaccess:latest
+    build:
+      context: .
+      dockerfile: Dockerfile.goaccess
     volumes:
-      - ./goaccess.conf:/etc/goaccess/goaccess.conf:ro
+      - ./goaccess.${ENV_TYPE:-dev}.conf:/etc/goaccess/goaccess.conf:ro
       - nginx_logs:/var/log/nginx
       - goaccess_data:/var/www/goaccess
-    ports:
-      - "7890:7890"
     command: ["--config-file=/etc/goaccess/goaccess.conf"]
-    depends_on:
-      - api_gateway
+    networks:
+      - monitor_net
 
 volumes:
   nginx_logs:
   goaccess_data:
+
+networks:
+  monitor_net:
