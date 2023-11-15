@@ -12,6 +12,10 @@ services:
     volumes:
       - frontend_dist:/app/dist
     ports:
+      # Expose port only for development mode.
+      # While in "production mode", frontend service will exit
+      # after building static files. Thus, no server will
+      # respond to the port in "production mode".
       - 8006:8006
     networks:
       - client-side
