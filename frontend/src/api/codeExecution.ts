@@ -11,22 +11,28 @@ export interface CodeExecutionRequest {
     source_code: string
 }
 
-export interface CodeExecutionResponse {
-    stderr: string | null
-    stdout: string
-    time: number
-}
+export type CodeExecutionResponse =
+    | {
+          hasError: false
+          errorMessage: null
+          stdout: string | null
+      }
+    | {
+          hasError: true
+          errorMessage: string
+          stdout: string | null
+      }
 
 interface Judge0Response {
     compile_output: string | null
     memory: number
-    message: string
+    message: string | null
     status: {
         id: number
         description: string
     }
     stderr: string | null
-    stdout: string
+    stdout: string | null
     time: string
     token: string
 }
@@ -41,6 +47,14 @@ interface Judge0Response {
 export async function executeCode(
     codePayload: CodeExecutionRequest
 ): Promise<CodeExecutionResponse> {
+    const isBlankCode = codePayload.source_code.trim().length === 0
+    if (isBlankCode)
+        return {
+            hasError: true,
+            errorMessage: 'Source code cannot be blank!',
+            stdout: null,
+        }
+
     const response = await fetch(CODE_EXECUTION_API_URL + '/execute', {
         method: 'POST',
         headers: CODE_EXECUTION_API_HEADER,
@@ -51,10 +65,23 @@ export async function executeCode(
     if (!response.ok) throw await ApiError.parseResponse(response)
 
     const data: Judge0Response = await response.json()
+
+    const ACCEPTED_STATUS = 3
+    if (data.status.id === ACCEPTED_STATUS)
+        return {
+            hasError: false,
+            errorMessage: null,
+            stdout: data.stdout,
+        }
+
+    let errorMessage = data.stderr ? data.stderr + '\n' : ''
+    errorMessage += data.compile_output ? data.compile_output + '\n' : ''
+    errorMessage += data.message ? data.message + '\n' : ''
+
     return {
-        stderr: data.stderr,
+        hasError: true,
+        errorMessage,
         stdout: data.stdout,
-        time: parseFloat(data.time),
     }
 }
 
@@ -115,7 +142,7 @@ const JUDGE0_LANGUAGES: Language[] = [
 ]
 
 const DEFAULT_LANGUAGE_ID = 63
-const AVAILABLE_LANGUAGE_IDS = [50, 51, 54, 60, DEFAULT_LANGUAGE_ID, 62, 78, 71, 73, 82, 83]
+const AVAILABLE_LANGUAGE_IDS = [51, 60, DEFAULT_LANGUAGE_ID, 71, 73, 82, 83]
 const removeLanguageVersion = (languageName: string) => languageName.replace(/\s+\(.+\)$/, '')
 
 /** Languages available to the user. */
