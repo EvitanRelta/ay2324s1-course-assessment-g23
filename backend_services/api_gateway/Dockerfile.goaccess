@@ -1,3 +1,5 @@
 FROM allinurl/goaccess:latest
 
-CMD ["/bin/sh", "-c", "test -f /var/log/nginx/access_file.log || touch /var/log/nginx/access_file.log && exec goaccess"]
+CMD mkdir -p /var/log/nginx/ && \
+    touch /var/log/nginx/access_file.log && \
+    exec goaccess
