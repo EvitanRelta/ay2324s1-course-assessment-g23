@@ -32,9 +32,7 @@ services:
 
   traffic_monitor:
     container_name: traffic_monitor
-    build:
-      context: .
-      dockerfile: Dockerfile.goaccess
+    image: allinurl/goaccess:latest
     volumes:
       - ./goaccess.${ENV_TYPE:-dev}.conf:/etc/goaccess/goaccess.conf:ro
       - nginx_logs:/var/log/nginx
@@ -45,6 +43,7 @@ services:
 
 volumes:
   nginx_logs:
+    external: true
   goaccess_data:
 
 networks:

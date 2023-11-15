@@ -16,6 +16,10 @@ fi
 if [ "$(docker volume ls | grep questions-data)" == "" ]; then
     docker volume create questions-data
 fi
+if [ "$(docker volume ls | grep nginx_logs)" == "" ]; then
+    docker volume create nginx_logs
+    docker run --rm -v nginx_logs:/nginx_logs nginx touch "./nginx_logs/access_file.log"
+fi
 
 # Remove CR (ie. \r) characters from `judge0.conf`, as judge0 server crashes if
 # it does; and Git keeps adding them back when Git's `autocrlf` is set to "input".
