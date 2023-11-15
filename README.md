@@ -24,7 +24,13 @@ bash start_containers.sh
 
 4. If you are deploying on a remote server, make sure to open port 80.
 5. Access the website on your browser at `http://<your ip address>:80` (80 is the default port for a website).
-6. (Note: This step is not required if you're deploying the application on your localhost.) Since we're using http instead of https, you'll need to edit the permissions of the site to access all the features (specifically, for video chatting). Type `<your browser>://flags/#unsafely-treat-insecure-origin-as-secure` into your browser url (replace `<your browser>` with `chrome` for google chrome). This will bring you to the relevant settings. Add the url of your deployment (`http://<your ip address>:80` or `http://peerprep.xyz`) in the text box and enable this setting.
+6. (Note: This step is not required if you're deploying the application on your localhost.) Since we're using http instead of https, you'll need to edit the permissions of the site to access all the features (specifically, for video chatting).
+
+- For Chrome:
+Type `<your browser>://flags/#unsafely-treat-insecure-origin-as-secure` into your browser url (replace `<your browser>` with `chrome` for google chrome). This will bring you to the relevant settings. Add the url of your deployment (`http://<your ip address>:80` or `http://peerprep.xyz`) in the text box and enable this setting.
+
+- For Safari:
+Click Safari > Preferences > Advanced and check `Show Develop menu in menu bar`. Select `Develop` in the menu bar and select `WebRTC`. Check `Allow Media Capture on Insecure Sites`
 
 ## Assignments
 
